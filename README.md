@@ -1,3 +1,4 @@
+**View the presentation slides**
 [![View Slides](https://img.shields.io/badge/View-Slides-blue)](./intro.pdf)
 
 | Notebook | Colab | Binder |
