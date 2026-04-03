@@ -2,7 +2,7 @@
 
 [![View Slides](https://img.shields.io/badge/View-Slides-blue)](./intro.pdf)
 
-👉 [⬇️ Download Slides](https://github.com/vanraak/intro-ml/blob/main/intro.pdf?raw=true)
+👉 [⬇️ Download Slides]((https://github.com/vanraak/intro-ml/blob/main/intro.pdf?raw=true))
 
 | Notebook | Colab | Binder |
 ------------|-------|--------|
