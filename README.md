@@ -4,10 +4,10 @@
 
 | Notebook | Colab | Binder |
 ------------|-------|--------|
+|Caravan | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/vanraak/intro-ml/blob/main/caravan.ipynb#copy) |  [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/vanraak/intro-ml/HEAD?urlpath=%2Fdoc%2Ftree%2Fcaravan.ipynb) |
 |K-Means | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/vanraak/intro-ml/blob/main/kmeans.ipynb#copy)  | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/vanraak/intro-ml/HEAD?urlpath=%2Fdoc%2Ftree%2Fkmeans.ipynb) |
 |Loans | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/vanraak/intro-ml/blob/main/loans.ipynb#copy) | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/vanraak/intro-ml/HEAD?urlpath=%2Fdoc%2Ftree%2Floans.ipynb) |
 |MNist | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/vanraak/intro-ml/blob/main/mnist.ipynb#copy) |  [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/vanraak/intro-ml/HEAD?urlpath=%2Fdoc%2Ftree%2Fmnist.ipynb) |
-
 
 This repository and its contents are provided for educational purposes only.
 Unauthorized distribution or modification without permission is not allowed.
