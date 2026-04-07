@@ -22,6 +22,14 @@ jobs:
           python-version: '3.11'
       
       # 3.5️⃣ Show changed files
+      - name: List all notebooks (sorted)
+        run: |
+          echo "All detected .ipynb files:"
+          find . -type f -name "*.ipynb" | sort
+
+      - name: Add Colab metadata
+        run: python .github/scripts/add_colab_metadata.py
+        
       - name: Show changed notebooks
         run: |
           echo "Changed files:"
@@ -30,10 +38,7 @@ jobs:
           echo "Notebook diffs:"
           git diff --name-only -- "*.ipynb"
           
-      # 3️⃣ Run the notebook metadata script
-      - name: Add Colab metadata
-        run: python .github/scripts/add_colab_metadata.py
-
+      
       # 4️⃣ Commit changes if there are any
       - name: Commit changes
         run: |
