@@ -2,7 +2,8 @@ name: Update Notebooks with Colab Metadata
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 permissions:
   contents: write
@@ -13,19 +14,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      # 1️⃣ Checkout repo
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      # 2️⃣ Setup Python
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
+      # 3️⃣ Run script
       - name: Add Colab metadata
         run: python .github/scripts/add_colab_metadata.py
 
+      # 4️⃣ Create or update PR automatically
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
           branch: update-notebooks
-          title: Add Colab metadata to notebooks
-          body: This PR updates notebooks with Colab metadata.
-          commit-message: Add Colab metadata
+          title: "Add Colab metadata to notebooks"
+          body: "This PR updates all notebooks to include the Colab metadata block."
+          commit-message: "Add Colab metadata to notebooks"
+          base: main
+          delete-branch: false
