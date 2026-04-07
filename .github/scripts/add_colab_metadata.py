@@ -1,52 +1,30 @@
-name: Update Notebooks with Colab Metadata
+import json
+import os
 
-on:
-  push:
-    branches:
-      - main  # Trigger on pushes to main
+COLAB_BLOCK = {"generative_ai_disabled": True, "provenance": []}
 
-jobs:
-  update-notebooks:
-    runs-on: ubuntu-latest
-    steps:
-      # 1️⃣ Checkout the repo with full history
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # Full history to allow force-push
 
-      # 2️⃣ Set up Python
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
+def update_ipynb(path):
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
 
-      # 3️⃣ Run the notebook metadata script
-      - name: Add Colab metadata
-        run: python .github/scripts/add_colab_metadata.py
+    metadata = data.setdefault("metadata", {})
 
-      # 4️⃣ Commit changes if there are any
-      - name: Commit changes
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add "*.ipynb"
-          git diff --cached --quiet || git commit -m "Add Colab metadata to notebooks"
+    if "colab" not in metadata:
+        metadata["colab"] = COLAB_BLOCK
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2)
+        print(f"Added 'colab' block: {path}")
+    else:
+        print(f"Skipped (already has 'colab'): {path}")
 
-      # 5️⃣ Force push to automation branch
-      - name: Push to automation branch
-        run: |
-          git branch -M update-notebooks
-          git push -f origin update-notebooks
 
-      # 6️⃣ Create or update Pull Request to main
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Add Colab metadata to notebooks"
-          branch: update-notebooks
-          title: "Add Colab metadata to notebooks"
-          body: "This PR updates all notebooks to include the Colab metadata block."
-          base: main
-          delete-branch: false
+def update_all_notebooks(root="."):
+    for dirpath, _, files in os.walk(root):
+        for file in files:
+            if file.endswith(".ipynb"):
+                update_ipynb(os.path.join(dirpath, file))
+
+
+if __name__ == "__main__":
+    update_all_notebooks(".")
